@@ -5,20 +5,24 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+This is an app for a stick & prey tattoos, used for bookings and portfolio.
 
-* System dependencies
+First I will build out each model, starting with users.
 
-* Configuration
+- Ruby version
 
-* Database creation
+- System dependencies
 
-* Database initialization
+- Configuration
 
-* How to run the test suite
+- Database creation
 
-* Services (job queues, cache servers, search engines, etc.)
+- Database initialization
 
-* Deployment instructions
+- How to run the test suite
 
-* ...
+- Services (job queues, cache servers, search engines, etc.)
+
+- Deployment instructions
+
+- ...

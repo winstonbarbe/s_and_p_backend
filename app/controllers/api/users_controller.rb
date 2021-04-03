@@ -5,7 +5,10 @@ class Api::UsersController < ApplicationController
       name: params[:name],
       email: params[:email],
       password: params[:password],
-      password_confirmation: params[:password_confirmation]
+      password_confirmation: params[:password_confirmation],
+      phone_number: params[:phone_number],
+      pronouns: params[:pronouns],
+      personal_note: params[:personal_note],
     )
     if user.save
       render json: { message: "User created successfully" }, status: :created

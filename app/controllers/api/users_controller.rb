@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-
+  before_action :authenticate_user, except: :create
   def create
     user = User.new(
       name: params[:name],
@@ -14,6 +14,15 @@ class Api::UsersController < ApplicationController
       render json: { message: "User created successfully" }, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :bad_request
+    end
+  end
+
+  def show
+    if current_user.id == params[:id].to_i || current_user == User.find_by(email: "stickandprey@gmail.com")
+      @user = User.find(params[:id])
+      render "show.json.jb", status: 200
+    else
+      render json: { error: "unauthorized" }, status: 401
     end
   end
 end

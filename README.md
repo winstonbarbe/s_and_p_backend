@@ -9,6 +9,8 @@ This is an app for a stick & prey tattoos, used for bookings and portfolio.
 
 First I will build out each model, starting with users.
 
+I have implemented some current user restrictions and a janky admin functionalitly, but I plan to go back and make this more secure
+
 - Ruby version
 
 - System dependencies

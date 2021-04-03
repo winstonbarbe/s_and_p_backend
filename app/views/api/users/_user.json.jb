@@ -1,0 +1,8 @@
+{
+  id: user.id,
+  name: user.name,
+  email: user.email,
+  pronouns: user.pronouns,
+  personal_note: user.personal_note,
+  phone_number: user.phone_number
+}

@@ -1,0 +1,4 @@
+user = render partial: "/api/users/user.json.jb", locals: { user: @user }
+user[:jwt] = @jwt
+
+user

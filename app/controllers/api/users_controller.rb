@@ -18,8 +18,9 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    if current_user.id == params[:id].to_i || current_user.admin
-      @user = User.find(params[:id])
+    user_id = params[:id].to_i
+    if current_user.is_allowed(user_id)
+      @user = User.find(user_id)
       render "show.json.jb", status: 200
     else
       render json: { error: "unauthorized" }, status: 401
@@ -27,7 +28,8 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    if current_user.id == params[:id].to_i
+    user_id = params[:id].to_i
+    if current_user.is_allowed(user_id)
       @user = current_user
       passwords = [
         params[:old_password],
@@ -39,13 +41,30 @@ class Api::UsersController < ApplicationController
       @user.email = params[:email] || @user.email
       @user.phone_number = params[:phone_number] || @user.phone_number
       @user.personal_note = params[:personal_note] || @user.personal_note
-      @user.pronouns = params[:pronouns] || @user.change_password(passwords)
-      # @user.change_password(passwords)
+      @user.pronouns = params[:pronouns] || @user.pronouns
+      if params[:old_password] && params[:password] && params[:password_confirmation]
+        if @user.authenticate(params[:old_password])
+          @user.update!(
+            password: params[:password],
+            password_confirmation: params[:password_confirmation],
+          )
+        end
+      end
       if @user.save
         render "show.json.jb", status: 200
       else
         render json: {error: "Unauthorized"}, status: 401
       end
+    end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    if user == current_user || current_user.admin
+      user.destroy
+      render json: { message: "Account Destroyed"}, status: 201
+    else
+      render json: { errors: "Unauthorized"}, status: 400
     end
   end
 end

@@ -15,5 +15,7 @@ I've spent the last couple hours, trying to find the best way to allow users to 
 ## Icebox
 
 1. I would like to add stems for user logic
+2. Add better user update logic when i comes to passwords
+   - I want to put something like conditional validations
 
 ---

@@ -67,4 +67,5 @@ class Api::UsersController < ApplicationController
       render json: { errors: "Unauthorized"}, status: 400
     end
   end
+  
 end
